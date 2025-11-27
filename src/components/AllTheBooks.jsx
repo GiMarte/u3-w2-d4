@@ -7,14 +7,23 @@ const AllTheBooks = function ({
   selectedBook,
 }) {
   const filteredBooks = books.filter((book) => {
-    return book.title.toLowerCase().includes(searchTerm.toLowerCase());
+    const title = book.title?.toLowerCase() || "";
+    const term = searchTerm?.toLowerCase() || "";
+    return title.includes(term);
   });
+
   return (
     <Container fluid>
-      <Row className="">
+      <Row>
         {filteredBooks.map((book) => {
           return (
-            <Col xs={6} md={5} lg={3} key={book.asin} className="p-0 p-lg-1">
+            <Col
+              xs={6}
+              md={5}
+              lg={3}
+              key={book.asin}
+              className="p-0 p-lg-1"
+              data-testid="book-card">
               <Card
                 className={`h-100
                   ${

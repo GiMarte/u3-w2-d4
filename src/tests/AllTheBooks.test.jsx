@@ -1,11 +1,12 @@
 import { render, screen } from "@testing-library/react";
 import { expect, test } from "vitest";
 import AllTheBooks from "../components/AllTheBooks";
+import Books from "../assets/scifi.json";
 
 test("Verifica che vengano effettivamente renderizzate tante bootstrap cards quanti sono i libri nel file json utilizzato.", () => {
-  render(<AllTheBooks />);
+  render(<AllTheBooks books={Books} />);
 
-  const heading = screen.getByText(/MAJESTIC - LIBERERIA/i);
+  const cards = screen.getAllByTestId("book-card");
 
-  expect(heading).toBeInTheDocument();
+  expect(cards.length).toBe(Books.length);
 });
